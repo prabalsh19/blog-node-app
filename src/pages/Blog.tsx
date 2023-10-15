@@ -1,12 +1,12 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./styles.scss";
-import { AuthContext } from "../context/authContext";
 import { CommentCard } from "../components/CommentCard";
+import { Blog as BlogType, User } from "../types";
 export const Blog = () => {
   const { id } = useParams();
-  const [blog, setBlog] = useState({});
+  const [blog, setBlog] = useState<BlogType | null>(null);
   const [comment, setComment] = useState("");
 
   useEffect(() => {
@@ -16,16 +16,20 @@ export const Blog = () => {
         const res = await axios.get(BASE_URL + "blog/" + id);
         setBlog(res.data.blog);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     })();
   }, []);
 
-  const handleAddComment = async (e) => {
+  const handleAddComment = async (e: React.SyntheticEvent) => {
     try {
       e.preventDefault();
       const BASE_URL = import.meta.env.VITE_BASE_URL;
-      const localUser = JSON.parse(localStorage.getItem("user"));
+      const localUserJSON = localStorage.getItem("user");
+      let localUser: User | null = null;
+      if (localUserJSON) {
+        localUser = JSON.parse(localUserJSON) as User;
+      }
       const author = localUser?.firstName || "Anonymous";
       const res = await axios.post(BASE_URL + "blog/comment/add/" + id, {
         text: comment,
@@ -38,10 +42,10 @@ export const Blog = () => {
       console.error(e);
     }
   };
-  console.log(blog);
+
   return (
     <div className="blog">
-      {blog.title && (
+      {blog && (
         <div className="blog__content">
           {blog.image && (
             <img src={blog.image} alt="" className="blog__content__img" />

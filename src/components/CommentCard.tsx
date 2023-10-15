@@ -1,4 +1,6 @@
-export const CommentCard = ({ text, author, createdAt }) => {
+import { Comment } from "../types";
+
+export const CommentCard = ({ text, author, createdAt }: Comment) => {
   const userProfile =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEJQojzcGqO6y17GCiXa5T-Zv0V3FXkzUQNdfzWAn1-lTSzBCQV_1mWgxgsRi0k2lQICs&usqp=CAU";
   const date = new Date(createdAt).toDateString();

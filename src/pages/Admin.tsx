@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import { Link } from "react-router-dom";
+import { Blog } from "../types";
 
 export const Admin = () => {
   const [blogs, setBlogs] = useState([]);
@@ -13,10 +14,10 @@ export const Admin = () => {
     })();
   }, []);
   const unApprovedBlogs = blogs.filter(
-    (blog) => blog.isApproved !== "Approved"
+    (blog: Blog) => blog.isApproved !== "Approved"
   );
 
-  const handleApprove = async (id) => {
+  const handleApprove = async (id: string) => {
     try {
       const BASE_URL = import.meta.env.VITE_BASE_URL;
       const res = await axios.post(
@@ -28,16 +29,15 @@ export const Admin = () => {
           },
         }
       );
-      console.log(res);
       if (res.status === 200) {
         window.location.reload();
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
-  const handleReject = async (id) => {
+  const handleReject = async (id: string) => {
     try {
       const BASE_URL = import.meta.env.VITE_BASE_URL;
       const res = await axios.post(
@@ -49,19 +49,18 @@ export const Admin = () => {
           },
         }
       );
-      console.log(res);
       if (res.status === 200) {
         window.location.reload();
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
   return (
     <div className="admin">
       {unApprovedBlogs.length > 0 ? (
-        unApprovedBlogs.map((blog) => (
+        unApprovedBlogs.map((blog: Blog) => (
           <>
             <div className="admin__actions">
               <p>Status: {blog.isApproved}</p>

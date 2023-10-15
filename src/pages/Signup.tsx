@@ -12,6 +12,7 @@ export const Signup = () => {
   });
   const { firstName, lastName, email, password } = formData;
 
+  //@ts-ignore
   const { setIsLoggedIn, setUser } = useContext(AuthContext);
 
   const handleInputChange = (name: string, value: string) => {
@@ -33,7 +34,6 @@ export const Signup = () => {
       setUser(response.data.user);
       navigate("/");
     } catch (e) {
-      alert("Signup failed Error:" + e.message);
       console.error(e);
     }
   };

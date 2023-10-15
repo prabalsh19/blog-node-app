@@ -3,6 +3,7 @@ import "./styles.scss";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Card } from "../components/Card";
+import { Blog } from "../types";
 
 export const MyBlogs = () => {
   const [blogs, setblogs] = useState([]);
@@ -14,7 +15,7 @@ export const MyBlogs = () => {
       setblogs(res.data.blogs);
     })();
   }, []);
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     try {
       const BASE_URL = import.meta.env.VITE_BASE_URL;
       const res = await axios.delete(BASE_URL + "blog/" + id, {
@@ -22,7 +23,7 @@ export const MyBlogs = () => {
           authentication: localStorage.getItem("token"),
         },
       });
-      console.log(res);
+
       if (res.status === 200) {
         window.location.reload();
       }
@@ -39,7 +40,7 @@ export const MyBlogs = () => {
           </Link>
         )}
         {blogs.length > 0 ? (
-          blogs.map((blog) => (
+          blogs.map((blog: Blog) => (
             <>
               <div className="myblogs__actions">
                 <p style={{ textAlign: "center" }}>Status: {blog.isApproved}</p>

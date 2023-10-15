@@ -10,11 +10,11 @@ export const Login = () => {
   });
   const { email, password } = formData;
   const navigate = useNavigate();
-  const { setIsLoggedIn, setUser } = useContext(AuthContext);
+  const { setIsLoggedIn, setUser } = useContext(AuthContext) || {};
   const handleInputChange = (name: string, value: string) => {
     setFormData({ ...formData, [name]: value });
   };
-  const handleLogin = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLogin = async (e: React.FormEvent) => {
     try {
       e.preventDefault();
       const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -22,12 +22,14 @@ export const Login = () => {
         email: email,
         password: password,
       });
-      console.log(response);
+
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data.user._id);
         localStorage.setItem("user", JSON.stringify(response.data.user));
+        //@ts-ignore
         setIsLoggedIn(true);
+        //@ts-ignore
         setUser(response.data.user);
         navigate("/");
       }
@@ -35,7 +37,7 @@ export const Login = () => {
       console.error(e);
     }
   };
-  console.log(formData);
+
   return (
     <div className="login">
       <h1>Login</h1>

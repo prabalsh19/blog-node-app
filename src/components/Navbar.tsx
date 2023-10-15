@@ -3,6 +3,7 @@ import "./styles.scss";
 import { AuthContext } from "../context/authContext";
 import { useContext } from "react";
 export const Navbar = () => {
+  //@ts-ignore
   const { isLoggedIn, setIsLoggedIn, role } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleLogout = () => {

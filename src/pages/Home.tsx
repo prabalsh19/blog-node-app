@@ -12,7 +12,7 @@ export const Home = () => {
       setBlogs(res.data.blogs);
     })();
   }, []);
-  console.log(blogs);
+
   return (
     <div className="home">
       <div className="home__blogs">

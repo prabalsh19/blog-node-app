@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { MyBlogs } from "./pages/MyBlogs.tsx";
-import { BlogContextProviver } from "./context/blogContext.tsx";
 import { Home } from "./pages/Home.tsx";
 import { Blog } from "./pages/Blog.tsx";
 import { AuthContextProvider } from "./context/authContext.tsx";
@@ -65,9 +64,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AuthContextProvider>
-      <BlogContextProviver>
-        <RouterProvider router={router} />
-      </BlogContextProviver>
+      <RouterProvider router={router} />
     </AuthContextProvider>
   </React.StrictMode>
 );
