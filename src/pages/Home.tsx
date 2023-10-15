@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import "./styles.scss";
 import { Link } from "react-router-dom";
+import { Blog } from "../types";
 export const Home = () => {
   const [blogs, setBlogs] = useState([]);
   useEffect(() => {
@@ -17,7 +18,7 @@ export const Home = () => {
     <div className="home">
       <div className="home__blogs">
         {blogs.length > 0 ? (
-          blogs.map((blog) => (
+          blogs.map((blog: Blog) => (
             <Link to={`/blog/${blog._id}`}>
               <Card key={blog._id} data={blog} />
             </Link>
