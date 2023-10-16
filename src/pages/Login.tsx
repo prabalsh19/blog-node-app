@@ -1,8 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./styles.scss";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/authContext";
+import { GoogleLogin } from "@react-oauth/google";
+import FacebookLogin from "@greatsumini/react-facebook-login";
+
 export const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -37,7 +40,13 @@ export const Login = () => {
       console.error(e);
     }
   };
-
+  const handleFacebookSuccess = (response) => {
+    return <Navigate to={"/login/createpassword"} state={response} />;
+  };
+  const handleFacebookFailure = (error) => {
+    alert("Something went wrong. Please try again");
+    console.error(error);
+  };
   return (
     <div className="login">
       <h1>Login</h1>
@@ -66,6 +75,24 @@ export const Login = () => {
           </Link>
         </span>
       </form>
+
+      <FacebookLogin
+        appId="1412680625944104"
+        style={{
+          backgroundColor: "#fff",
+          color: "#4267b2",
+          fontSize: "16px",
+          padding: "12px 24px",
+          border: "none",
+          borderRadius: "4px",
+          margin: "auto",
+          display: "block",
+          marginTop: "2rem",
+          cursor: "pointer",
+        }}
+        onFail={handleFacebookFailure}
+        onProfileSuccess={handleFacebookSuccess}
+      />
     </div>
   );
 };
