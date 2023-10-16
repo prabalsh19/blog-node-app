@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, redirect } from "react-router-dom";
 import "./styles.scss";
 import { useContext, useState } from "react";
 import axios from "axios";
@@ -41,7 +41,7 @@ export const Login = () => {
   };
   //@ts-ignore
   const handleFacebookSuccess = (response) => {
-    return <Navigate to={"/login/createpassword"} state={response} />;
+    navigate("/login/createpassword", { state: response });
   };
   //@ts-ignore
   const handleFacebookFailure = (error) => {
