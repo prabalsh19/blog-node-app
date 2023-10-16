@@ -4,8 +4,8 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/authContext";
 import FacebookLogin from "@greatsumini/react-facebook-login";
-import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
+// import { GoogleLogin } from "@react-oauth/google";
+// import jwt_decode from "jwt-decode";
 
 export const Login = () => {
   const [formData, setFormData] = useState({
@@ -51,10 +51,10 @@ export const Login = () => {
     console.error(error);
   };
   //@ts-ignore
-  const handleGoogleSuccess = (response) => {
-    const data = jwt_decode(response.credential);
-    navigate("/login/createpassword", { state: data });
-  };
+  // const handleGoogleSuccess = (response) => {
+  //   const data = jwt_decode(response.credential);
+  //   navigate("/login/createpassword", { state: data });
+  // };
   return (
     <div className="login">
       <h1>Login</h1>
@@ -84,7 +84,7 @@ export const Login = () => {
         </span>
       </form>
       <div style={{ margin: "auto", width: "fit-content", marginTop: "1rem" }}>
-        <GoogleLogin
+        {/* <GoogleLogin
           onSuccess={(credentialResponse) => {
             handleGoogleSuccess(credentialResponse);
           }}
@@ -94,7 +94,7 @@ export const Login = () => {
           }}
           width={"200px"}
           useOneTap
-        />
+        /> */}
       </div>
 
       <FacebookLogin
