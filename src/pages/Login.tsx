@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./styles.scss";
 import { useContext, useState } from "react";
 import axios from "axios";
