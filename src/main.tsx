@@ -12,7 +12,6 @@ import { Signup } from "./pages/Signup.tsx";
 import { AddBlog } from "./pages/AddBlog.tsx";
 import { Admin } from "./pages/Admin.tsx";
 import { EditBlog } from "./pages/EditBlog.tsx";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import { CreatePassword } from "./pages/CreatePassword.tsx";
 const router = createBrowserRouter([
   {
