@@ -4,6 +4,8 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/authContext";
 import FacebookLogin from "@greatsumini/react-facebook-login";
+import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
 
 export const Login = () => {
   const [formData, setFormData] = useState({
@@ -48,6 +50,11 @@ export const Login = () => {
     alert("Something went wrong. Please try again");
     console.error(error);
   };
+  //@ts-ignore
+  const handleGoogleSuccess = (response) => {
+    const data = jwt_decode(response.credential);
+    navigate("/login/createpassword", { state: data });
+  };
   return (
     <div className="login">
       <h1>Login</h1>
@@ -76,6 +83,19 @@ export const Login = () => {
           </Link>
         </span>
       </form>
+      <div style={{ margin: "auto", width: "fit-content", marginTop: "1rem" }}>
+        <GoogleLogin
+          onSuccess={(credentialResponse) => {
+            handleGoogleSuccess(credentialResponse);
+          }}
+          onError={() => {
+            console.log("Login Failed");
+            alert("Login Failed");
+          }}
+          width={"200px"}
+          useOneTap
+        />
+      </div>
 
       <FacebookLogin
         appId="1412680625944104"
