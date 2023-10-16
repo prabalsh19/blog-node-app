@@ -3,7 +3,6 @@ import "./styles.scss";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/authContext";
-import { GoogleLogin } from "@react-oauth/google";
 import FacebookLogin from "@greatsumini/react-facebook-login";
 
 export const Login = () => {
@@ -40,9 +39,11 @@ export const Login = () => {
       console.error(e);
     }
   };
+  //@ts-ignore
   const handleFacebookSuccess = (response) => {
     return <Navigate to={"/login/createpassword"} state={response} />;
   };
+  //@ts-ignore
   const handleFacebookFailure = (error) => {
     alert("Something went wrong. Please try again");
     console.error(error);
