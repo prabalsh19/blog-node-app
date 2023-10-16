@@ -12,7 +12,8 @@ import { Signup } from "./pages/Signup.tsx";
 import { AddBlog } from "./pages/AddBlog.tsx";
 import { Admin } from "./pages/Admin.tsx";
 import { EditBlog } from "./pages/EditBlog.tsx";
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { CreatePassword } from "./pages/CreatePassword.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -59,12 +60,15 @@ const router = createBrowserRouter([
   },
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <Signup /> },
+  { path: "/login/createpassword", element: <CreatePassword /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <RouterProvider router={router} />
-    </AuthContextProvider>
+    <GoogleOAuthProvider clientId="599820019629-suufgudpi5g662o3qbjr9fibiluosup4.apps.googleusercontent.com">
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
+    </GoogleOAuthProvider>
   </React.StrictMode>
 );

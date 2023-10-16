@@ -235,3 +235,41 @@
     }
   }
 }
+
+.createPassword {
+  color: white;
+  height: 100vh;
+  padding: 2rem;
+  box-shadow: $box-shadow;
+  background-color: $secondary-color;
+  padding-top: 7rem;
+  h2 {
+    text-align: center;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: max-content;
+    margin: auto;
+    input {
+      padding: 7px;
+      font-size: 16px;
+      outline: none;
+      border-radius: 4px;
+      border: none;
+      width: 15rem;
+    }
+    button {
+      padding: 5px;
+      background-color: white;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+  }
+  &__loginBtn {
+    color: white;
+  }
+}
